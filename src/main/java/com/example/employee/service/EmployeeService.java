@@ -1,5 +1,8 @@
 package com.example.employee.service;
 
+import com.example.employee.exception.EmployeeAlreadyAddedException;
+import com.example.employee.exception.EmployeeNotFoundException;
+import com.example.employee.exception.EmployeeStorageIsFullException;
 import com.example.employee.model.Employee;
 
 import java.util.ArrayList;
@@ -10,6 +13,12 @@ public class EmployeeService {
     private static final int SIZE_LIMIT = 10;
 
     public Employee add(Employee employee) {
+        if (employees.size() >= SIZE_LIMIT) {
+            throw new EmployeeStorageIsFullException();
+        }
+        if (employees.contains(employee)) {
+            throw new EmployeeAlreadyAddedException();
+        }
         employees.add(employee);
         return employee;
     }
@@ -20,7 +29,7 @@ public class EmployeeService {
                 return employee;
             }
         }
-        return null;
+        throw new EmployeeNotFoundException();
     }
 
     public Employee remove(String firstName, String lastName) {
