@@ -4,13 +4,20 @@ import com.example.employee.exception.EmployeeAlreadyAddedException;
 import com.example.employee.exception.EmployeeNotFoundException;
 import com.example.employee.exception.EmployeeStorageIsFullException;
 import com.example.employee.model.Employee;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
+import java.util.Collections;
+@Service
 public class EmployeeService {
-    private final Collection<Employee> employees = new ArrayList<>(SIZE_LIMIT);
+
     private static final int SIZE_LIMIT = 10;
+    private final Collection<Employee> employees = new ArrayList<>(SIZE_LIMIT);
+
+    public Collection<Employee> getAll() {
+        return Collections.unmodifiableCollection(employees);
+    }
 
     public Employee add(Employee employee) {
         if (employees.size() >= SIZE_LIMIT) {

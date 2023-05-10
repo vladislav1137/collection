@@ -3,14 +3,12 @@ package com.example.employee.model;
 import java.util.Objects;
 
 public class Employee {
-    private String firstName;
+ private String firstName;
+ private String lastName;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
+    public Employee(String firstName, String lastName) {
         this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     @Override
@@ -26,6 +24,14 @@ public class Employee {
         return Objects.hash(firstName, lastName);
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getLastName() {
         return lastName;
     }
@@ -33,6 +39,4 @@ public class Employee {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    private String lastName;
 }
